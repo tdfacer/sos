@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tdfacer/sos/issues"
   },
-  "homepage": "https://github.com/tdfacer/sos#readme"
+  "homepage": "https://github.com/tdfacer/sos#readme",
+  "devDependencies": {
+    "serverless-offline-python": "^3.22.1"
+  }
 }
