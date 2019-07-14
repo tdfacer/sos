@@ -15,3 +15,11 @@ functions:
 plugins:
   - serverless-offline-python
   - serverless-offline-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+package:
+  exclude:
+    - venv/**
