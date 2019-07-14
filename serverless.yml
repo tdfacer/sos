@@ -14,7 +14,7 @@ functions:
 
 plugins:
   - serverless-offline-python
-  - serverless-offline-requirements
+  - serverless-python-requirements
 
 custom:
   pythonRequirements:

@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/tdfacer/sos#readme",
   "devDependencies": {
+    "serverless-offline": "^5.7.3",
     "serverless-offline-python": "^3.22.1"
   },
   "dependencies": {
+    "serverless": "^1.47.0",
     "serverless-python-requirements": "^4.3.0"
   }
 }
