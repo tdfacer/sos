@@ -12,6 +12,13 @@ functions:
           path: /get-bucket-items
           method: get
 
+  create:
+    handler: src/handler.create_bucket_item
+    events:
+      - http:
+          path: /create
+          method: post
+
 plugins:
   - serverless-offline-python
   - serverless-python-requirements
