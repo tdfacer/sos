@@ -3,6 +3,17 @@ service: sos # NOTE: update this with your service name
 provider:
   name: aws
   runtime: python3.7
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: ${self:custom.BUCKET_ITMES_TABLE_ARN}
 
 functions:
   hello:
@@ -32,6 +43,9 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: non-linux
+  TABLE_NAME: 'BucketItems'
+  BUCKET_ITMES_TABLE_ARN: arn:aws:dynamodb:us-east-1:792000220664:table/BucketItems
+
 
 package:
   exclude:
