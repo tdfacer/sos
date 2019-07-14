@@ -9,6 +9,12 @@ functions:
     handler: src/handler.get_one_bucket_item
     events:
       - http:
+          path: /get
+          method: get
+  list:
+    handler: src/handler.get_bucket_items
+    events:
+      - http:
           path: /get-bucket-items
           method: get
 

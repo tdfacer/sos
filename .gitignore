@@ -8,3 +8,6 @@ __pycache__
 *.pyc
 *.log
 **/settings.json
+.test
+.test/*
+.serverless
