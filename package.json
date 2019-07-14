@@ -1,0 +1,19 @@
+{
+  "name": "sos",
+  "version": "1.0.0",
+  "description": "Save Our Summer (SOS): A bucket list tool designed for families",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdfacer/sos.git"
+  },
+  "author": "tdfacer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tdfacer/sos/issues"
+  },
+  "homepage": "https://github.com/tdfacer/sos#readme"
+}
