@@ -26,5 +26,5 @@ provider "aws" {
 }
 
 module "sos-infrasctructure" {
-  source = "git::https://github.com/tdfacer/terrafacer.git//terraform/modules/sos?ref=v1.0.1"
+  source = "git::https://github.com/tdfacer/terrafacer.git//terraform/modules/sos?ref=v1.0.2"
 }
