@@ -1,0 +1,17 @@
+service: sos # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: python3.7
+
+functions:
+  hello:
+    handler: src/handler.get_one_bucket_item
+    events:
+      - http:
+          path: /get-bucket-items
+          method: get
+
+plugins:
+  - serverless-offline-python
+  - serverless-offline-requirements
