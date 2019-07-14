@@ -1,4 +1,5 @@
 import boto3
+from boto3.dynamodb.conditions import Key, Attr
 import json
 
 def create_bucket_item(event, context):
@@ -34,21 +35,56 @@ def create_bucket_item(event, context):
 
     return response
 
+    # insert_data function for inserting data into dynamodb table
+def insert_data(recList):
+    table = dynamodb.Table('BucketItems')
+    for i in range(len(recList)):
+        record = recList[i]
+        table.put_item(
+            Item={
+                'username': record['username'],
+                'lastname': record['lastname']
+            }
+        )
+
 
 def get_one_bucket_item(event, context):
-    ddb = boto3.client('dynamodb', endpoint_url='http://localhost:8000')
-    response = ddb.list_tables()
-    print(response)
+    # ddb = boto3.client('dynamodb', endpoint_url='http://localhost:8000')
+    ddb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
+    table = ddb.Table('BucketItems')
+    # response = ddb.list_tables()
+    # print(response)
+    print(f'event: {event}')
 
+    found_item = {}
+    response = {}
+    try:
+        id = event['pathParameters']['id']
+        print(f'id: {id}')
+        response = table.query(
+            KeyConditionExpression=Key('Id').eq(id)
+        )
+        print(f'response: {response}')
+        found_item = response['Items'][0]
+        print(f'item one: {found_item}')
+        # print(f'response[0]: {response['Items'][0]}')
+        response = {
+            "statusCode": 200,
+            "body": found_item
+        }
+    except Exception as e:
+        print(f'error when parsing path parameter: {e}')
+        response = {
+            "statusCode": 404
+        }
+
+        # "input": event
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
+        "input": found_item
     }
 
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
+        # "body": json.dumps(body)
 
     return response
 
@@ -112,7 +148,7 @@ def get_bucket_items(event, context):
         # body = json.dumps(body)
         # "body": json.dumps(body),
     response = {
-        "body": body,
+        "body": items,
         "statusCode": 200
     }
     # response = {
