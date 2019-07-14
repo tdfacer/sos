@@ -4,6 +4,7 @@
   "description": "Save Our Summer (SOS): A bucket list tool designed for families",
   "main": "index.js",
   "scripts": {
+    "start": "serverless offline start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/tdfacer/sos#readme",
   "devDependencies": {
     "serverless-offline-python": "^3.22.1"
+  },
+  "dependencies": {
+    "serverless-python-requirements": "^4.3.0"
   }
 }
