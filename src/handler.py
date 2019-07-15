@@ -1,11 +1,13 @@
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import json
+import os
 
 def create_bucket_item(event, context):
     print(f"event: {event}")
     print(f"event.body: {event['body']}")
-    ddb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
+    # ddb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
+    ddb = boto3.resource('dynamodb')
     table = ddb.Table('BucketItems')
     body = json.loads(event['body'])
     print(f"body: {body}")
@@ -79,9 +81,12 @@ def get_one_bucket_item(event, context):
     return response
 
 def get_bucket_items(event, context):
+    print(f"environ: {os.environ}")
+    # print(f"islocal: {os.environ['MY_IS_LOCAL']}")
     items = []
 
-    dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
+    # dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
+    dynamodb = boto3.resource('dynamodb')
 
     table = dynamodb.Table('BucketItems')
 
@@ -100,8 +105,20 @@ def get_bucket_items(event, context):
         "input": json.dumps(items)
     }
 
+    print(f"body: {body}")
+
+    # response = {
+    #     "body": items,
+    #     "statusCode": 200
+    # }
+
+    # response = {
+    #     "body": "test",
+    #     "statusCode": 200
+    # }
+
     response = {
-        "body": items,
+        "body": json.dumps(items),
         "statusCode": 200
     }
 
