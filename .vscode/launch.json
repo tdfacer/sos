@@ -9,7 +9,21 @@
       "request": "launch",
       "name": "Serverless Offline",
       "program": "${workspaceFolder}/node_modules/.bin/sls",
-      "args": ["offline", "start"]
+      "args": ["offline", "start", "--stage"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Serverless Live",
+      "program": "${workspaceFolder}/node_modules/.bin/sls",
+      "args": ["offline", "start", "--stage", "live"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Serverless Local",
+      "program": "${workspaceFolder}/node_modules/.bin/sls",
+      "args": ["offline", "start", "--stage", "local"]
     }
   ]
 }

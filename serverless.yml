@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: python3.7
   region: us-east-1
+  stage: ${opt:stage, 'live'}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -14,9 +15,12 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: ${self:custom.BUCKET_ITMES_TABLE_ARN}
+  environment:
+    LOCAL_ENV: ${self:custom.${self:custom.stage}.LOCAL_ENV}
+    TABLE_NAME: ${self:custom.${self:custom.stage}.TABLE_NAME}
 
 functions:
-  hello:
+  get:
     handler: src/handler.get_one_bucket_item
     events:
       - http:
@@ -36,6 +40,20 @@ functions:
           path: /create
           method: post
 
+  delete:
+    handler: src/handler.delete_item
+    events:
+      - http:
+          path: /delete/{id}
+          method: delete
+
+  delete_all:
+    handler: src/handler.delete_all
+    events:
+      - http:
+          path: /delete_all
+          method: delete
+
 plugins:
   - serverless-offline-python
   - serverless-python-requirements
@@ -43,9 +61,14 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: non-linux
-  TABLE_NAME: 'BucketItems'
   BUCKET_ITMES_TABLE_ARN: arn:aws:dynamodb:us-east-1:792000220664:table/BucketItems
-
+  stage: ${opt:stage, self:provider.stage}
+  local:
+    LOCAL_ENV: "TRUE"
+    TABLE_NAME: 'BucketItems'
+  live:
+    LOCAL_ENV: "FALSE"
+    TABLE_NAME: 'BucketItems'
 
 package:
   exclude:
