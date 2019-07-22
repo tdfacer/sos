@@ -47,6 +47,20 @@ functions:
           path: /delete/{id}
           method: delete
 
+  update:
+    handler: src/handler.update_bucket_item
+    events:
+      - http:
+          path: /update/{id}
+          method: put
+
+  update_urls:
+    handler: src/handler.update_urls
+    events:
+      - http:
+          path: /update/{id}
+          method: post
+
   delete_all:
     handler: src/handler.delete_all
     events:
