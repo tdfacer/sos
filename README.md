@@ -9,6 +9,22 @@ SOS is intended to be a full bucket list solution, including:
 * S3 bucket (used for photo storage)
 * Android mobile application
 
+## Contents Overview
+
+### src
+
+* This defines a lambda handler, written in python
+* This is deployed using the serverless framework
+
+### terraform
+
+* ./terraform/live/main.tf
+* This consumes a module from tdfacer/terraform
+* That module creates a few resources needed for the SOS application:
+  * An S3 bucket
+  * An IAM user
+  * IAM policy
+
 #### Screenshot
 * TODO
 ![Screenshot software](http://url/screenshot-software.png "screenshot software")
